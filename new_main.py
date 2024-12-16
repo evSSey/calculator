@@ -29,29 +29,39 @@ ROOT.config(bg='#000000')
 ROOT.resizable(False, False)
 ROOT.geometry(f"300x450+{ROOT.winfo_screenwidth() // 2 - 175}+{ROOT.winfo_screenheight() // 2 - 250}")
 
-TEXT = ""
+TEXT = "0"
+
 
 def change():
     pass
 
+
 def percent():
     pass
+
 
 def equal():
     pass
 
+
 def dot():
     pass
 
+
 def clear():
     global TEXT
-    TEXT = ""
+    TEXT = "0"
     sign.config(text=TEXT)
+
 
 def number(button):
     global TEXT
-    TEXT += button["text"]
+    if TEXT == "0":
+        TEXT = button["text"]
+    else:
+        TEXT += button["text"]
     sign.config(text=TEXT)
+
 
 def operation():
     pass
@@ -106,7 +116,7 @@ for i in range(len(buttons)):
 
 
 
-sign = tk.Label(width=8, fg=WHITE, bg=BLACK, font=("Arial", 42))
+sign = tk.Label(width=8, text=TEXT, fg=WHITE, bg=BLACK, font=("Arial", 42))
 sign.grid(row=0, column=0, columnspan=4, pady=PADY, padx=PADX)
 
 
