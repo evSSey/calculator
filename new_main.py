@@ -45,8 +45,18 @@ def equal():
 
 
 def dot():
-    pass
-
+    global TEXT
+    if TEXT[-1].isdigit():
+        for item in "/x-+":
+            if item in TEXT:
+                elements = TEXT.split(item)
+                print(elements)
+                break
+        else:
+            elements = [TEXT]
+        if "." not in elements[-1]:
+            TEXT += "."
+            sign.config(text=TEXT)
 
 def clear():
     global TEXT
@@ -63,8 +73,11 @@ def number(button):
     sign.config(text=TEXT)
 
 
-def operation():
-    pass
+def operation(button):
+    global TEXT
+    if TEXT[-1].isdigit():
+        TEXT += button["text"]
+        sign.config(text=TEXT)
 
 # Кнопки цифр
 btn_0 = tk.Button(text="0", command=lambda: number(btn_0))
@@ -79,10 +92,10 @@ btn_8 = tk.Button(text="8", command=lambda: number(btn_8))
 btn_9 = tk.Button(text="9", command=lambda: number(btn_9))
 
 # Кнопки операций
-btn_multiply = tk.Button(text="x", command=operation)
-btn_divide = tk.Button(text="/", command=operation)
-btn_minus = tk.Button(text="-", command=operation)
-btn_plus = tk.Button(text="+", command=operation)
+btn_multiply = tk.Button(text="x", command=lambda: operation(btn_multiply))
+btn_divide = tk.Button(text="/", command=lambda: operation(btn_divide))
+btn_minus = tk.Button(text="-", command=lambda: operation(btn_minus))
+btn_plus = tk.Button(text="+", command=lambda: operation(btn_plus))
 
 # Другие кнопки
 btn_plus_minus = tk.Button(text="+/-", command=change)
@@ -116,7 +129,7 @@ for i in range(len(buttons)):
 
 
 
-sign = tk.Label(width=8, text=TEXT, fg=WHITE, bg=BLACK, font=("Arial", 42))
+sign = tk.Label(width=8, height=2, text=TEXT, fg=WHITE, bg=BLACK, font=("Arial", 20))
 sign.grid(row=0, column=0, columnspan=4, pady=PADY, padx=PADX)
 
 
